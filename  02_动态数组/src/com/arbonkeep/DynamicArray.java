@@ -74,8 +74,13 @@ public class DynamicArray<E> {
         //思考：为什么是size - 1，和index
         //因为在index位置插入一个元素，那么从index开始到最后一个元素都是需要向后移动的，
         //并且需要遵循后面的元素先移动的规律
-        for (int i = size -1; i >= index; i--) {//遵循后面的元素先移动，直到index元素
-            elements[i + 1] = elements[i];//后移
+//        for (int i = size -1; i >= index; i--) {//遵循后面的元素先移动，直到index元素
+//            elements[i + 1] = elements[i];//后移，将i移动到i+1
+//        }
+
+        //优化
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];//将i-1移动到i
         }
         elements[index] = element;
         size++;
@@ -95,7 +100,7 @@ public class DynamicArray<E> {
         E old = elements[index];
         //思考：为什么是时index + 1和index -1（最后一个元素） 呢？
         // 这是因为删除元素后，需要向前移动的元素的范围是index + 1 到index -1
-        for (int i = index + 1; i <= size - 1; i ++) {//遍历需要向前移动的元素
+        for (int i = index + 1; i < size; i ++) {//遍历需要向前移动的元素,i<size等价于i <= size - 1
             elements[i - 1] = elements[i];//将后面一个元素前移
         }
         size--;
@@ -105,8 +110,14 @@ public class DynamicArray<E> {
 
     //查看元素的索引
     public int indexOf(E element) {
-        for (int i = 0; i < size; i++) {
-            if (elements[i].equals(element)) return  i;
+        if (element == null) {
+            for (int i = 0; i < size; i++) {
+                if (elements[i] == null) return i;//如果元素为null，那么就返回null对应的索引
+            }
+        }else {
+            for (int i = 0; i < size; i++) {
+                if (element.equals(elements[i])) return  i;
+            }
         }
         return ELEMENT_NOT_FOUND;
     }
@@ -117,7 +128,7 @@ public class DynamicArray<E> {
         if (oldCapacity >= capacity) return;//不需要扩容，直接返回
 
         //新容量为旧容量的1.5倍
-        int newCapacity = oldCapacity + (oldCapacity >> 1);
+        int newCapacity = oldCapacity + (oldCapacity >> 1);//1+1/2
         E[] newElements = (E[])new Object[newCapacity];//创建一个新的数组
 
         //遍历，将旧数组的元素添加到新数组中

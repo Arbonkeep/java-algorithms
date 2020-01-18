@@ -1,6 +1,9 @@
 package com.arbonkeep;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import org.junit.Test;
+
+import java.util.ArrayList;
 
 /**
  * @author arbonkeep
@@ -29,5 +32,31 @@ public class Main {
             dy.add(11);
         }
         System.out.println(dy);
+    }
+
+    @Test
+    public void test() {
+        DynamicArray<Integer> dy = new DynamicArray<>();
+        dy.add(11);
+        dy.add(22);
+        dy.add(33);
+        dy.add(44);
+        dy.add(55);
+        dy.add(null);
+
+        System.out.println(dy.indexOf(null));//可以存储空元素，这是由我们自己定义的
+
+    }
+
+    //ArrayList原码
+    @Test
+    public void test1() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(11);
+        list.add(22);
+        list.add(33);
+        //注意：ArrayList集合是基于动态数组实现的，并且源码与我们实现的动态数组基本相似，只不过源码比较
+        //完善
+
     }
 }
