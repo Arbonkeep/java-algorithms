@@ -108,6 +108,11 @@ public class DynamicArray<E> {
         return old;
     }
 
+    //删除指定的元素
+    public void remove(E element) {
+        remove(indexOf(element));//调用方法执行删除
+    }
+
     //查看元素的索引
     public int indexOf(E element) {
         if (element == null) {
