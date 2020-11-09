@@ -76,7 +76,7 @@ public class ArrayList<E> extends AbstractList<E>  {
     public void add(int index, E element) {
         rangeCheckForAdd(index);
         //检查是否需要扩容，如果需要就直接完成扩容。如果不需要就结束方法
-        ensureCapaciry(size + 1);//如果需要继续添加元素，那么就是size + 1
+        ensureCapacity(size + 1);//如果需要继续添加元素，那么就是size + 1
 
         for (int i = size; i > index; i--) {//由后向前遍历，并依次后移
             elements[i] = elements[i - 1];//将前面元素的值赋值给后面
@@ -141,7 +141,7 @@ public class ArrayList<E> extends AbstractList<E>  {
      * 保证需要有capacity的容量(扩容)
      * @param capacity
      */
-    private void ensureCapaciry(int capacity) {
+    private void ensureCapacity(int capacity) {
         int oldCapacity = elements.length;
         if (oldCapacity >= capacity) return;
 

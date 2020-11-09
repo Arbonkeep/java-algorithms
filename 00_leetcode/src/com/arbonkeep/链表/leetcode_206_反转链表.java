@@ -1,5 +1,7 @@
 package com.arbonkeep.链表;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 /**
  * https://leetcode-cn.com/problems/reverse-linked-list/
  * @author arbonkeep
@@ -26,4 +28,24 @@ public class leetcode_206_反转链表 {
         head.next = null;
         return newHead;
     }
+
+    /**
+     * 使用迭代方式实现(非递归)
+     * @param head
+     * @return
+     * 思路：创建一个新节点newHead=null，创建一个临时节点temp=head.next,然后循环依次
+     *      head.next = newHead;newHead = head;head = temp;
+     */
+    public ListNode reservseList2(ListNode head) {
+        ListNode newHead = null;
+        while (head != null) {
+            ListNode temp = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = temp;
+        }
+        return newHead;
+    }
+
+
 }

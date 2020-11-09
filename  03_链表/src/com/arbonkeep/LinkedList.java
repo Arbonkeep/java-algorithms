@@ -94,6 +94,8 @@ public class LinkedList<E> extends AbstractList<E> {
      */
     @Override
     public void add(int index, E element) {//index可能为0
+        rangeCheckForAdd(index);
+
         if (index == 0) {//在最前面添加元素
             first = new Node<>(element, first);//将first.next指向first
         } else {
@@ -114,6 +116,8 @@ public class LinkedList<E> extends AbstractList<E> {
      */
     @Override
     public E remove(int index) {
+        rangeCheck(index);
+
         //记录需要删除的节点
         Node<E> node = first;
         if (index == 0) {
